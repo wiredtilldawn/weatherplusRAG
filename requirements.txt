@@ -1,0 +1,12 @@
+
+langchain-qdrant
+streamlit
+requests
+qdrant-client
+langchain
+langgraph
+langsmith
+google-generativeai
+PyPDF2
+pypdf
+langchain-community

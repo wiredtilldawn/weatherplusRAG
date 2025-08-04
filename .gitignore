@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Jupyter and VS Code
+.ipynb_checkpoints/
+.vscode/
+
+# Data and cache
+*.sqlite3
+data/cache_*.pdf
+*.log
+
+# OS files
+.DS_Store
+
+# LangSmith logs
+langsmith_logs/
+
+# Streamlit
+.streamlit/
+
+# PDF uploads
+uploaded.pdf
+
+# Environment variables
+.env
+.env.*
+
+# Misc
+*.bak
+*.swp
+
+data
