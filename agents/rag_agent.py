@@ -12,7 +12,7 @@ def ask_pdf(query):
         return "⚠️ Please upload a PDF first."
     
     retriever = vectorstore.as_retriever()
-    docs = retriever.get_relevant_documents(query)
+    docs = retriever.invoke(query)
     context = "\n".join([doc.page_content for doc in docs])
 
     model = get_llm()
@@ -20,10 +20,20 @@ def ask_pdf(query):
     response = model.generate_content(prompt)
     return response.text
 
+
+from config import PDF_PATH
 def get_vectorstore():
-    # Initialize and return a new vectorstore instance per request
-    pass
+    global vectorstore
+    if not vectorstore:
+        vectorstore = process_pdf_and_store(PDF_PATH)
+    return vectorstore
 
 def run_rag_agent(query):
-    vectorstore = get_vectorstore()
-    # ...existing code...
+    vs = get_vectorstore()
+    retriever = vs.as_retriever()
+    docs = retriever.invoke(query)
+    context = "\n".join([doc.page_content for doc in docs])
+    model = get_llm()
+    prompt = f"Answer based on the following context:\n\n{context}\n\nQuestion: {query}"
+    response = model.generate_content(prompt)
+    return response.text

@@ -9,7 +9,6 @@ st.set_page_config(page_title="AI Engineer Assignment", page_icon="🤖")
 st.title("AI Engineer Assignment Demo")
 st.markdown("### Upload a PDF for RAG-based Q&A")
 
-# ✅ Function to hash file to detect duplicates
 def get_file_hash(file_bytes):
     return hashlib.md5(file_bytes).hexdigest()
 
@@ -27,7 +26,6 @@ if uploaded_pdf is not None:
         progress_text = st.empty()
         progress_bar = st.progress(0)
 
-        # ✅ Call initialize_vectorstore with progress callback
         initialize_vectorstore(cache_path, progress_callback=lambda i, total: (
             progress_bar.progress((i + 1) / total),
             progress_text.markdown(f"Embedding chunk {i+1}/{total}...")
@@ -37,7 +35,6 @@ if uploaded_pdf is not None:
         st.success("PDF uploaded and processed!")
     else:
         st.info("⚡ Using cached embeddings for this PDF!")
-        # Always initialize vectorstore for cached PDFs as well
         initialize_vectorstore(cache_path)
 
 st.markdown("### Ask a question")

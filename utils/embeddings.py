@@ -56,14 +56,12 @@ def process_pdf_and_store(pdf_path, progress_callback=None):
             vectors_config=rest.VectorParams(size=768, distance=rest.Distance.COSINE)
         )
 
-    # Use the embeddings instance, not a lambda function
     vectorstore = QdrantVectorStore(
         client=client,
         collection_name="pdf_docs",
         embedding=embeddings
     )
 
-    # ✅ Batch with progress
     BATCH_SIZE = 5
     total_batches = (len(docs) + BATCH_SIZE - 1) // BATCH_SIZE
     for i in range(0, len(docs), BATCH_SIZE):

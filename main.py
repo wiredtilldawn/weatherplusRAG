@@ -1,9 +1,8 @@
-from agents.decision_node import decide_and_route
+from agents.langgraph_pipeline import run_langgraph_pipeline
 from utils.evaluator import evaluate_response
 
 def run_agent(query):
-    answer = decide_and_route(query)
-    evaluate_response(query, answer)
+    answer = run_langgraph_pipeline(query)
     return answer
 
 if __name__ == "__main__":
